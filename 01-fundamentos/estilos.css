@@ -1,0 +1,43 @@
+/* Contenedor principal:  un div */
+.box {
+  margin: 50px; /* espacio fuera del border */
+  border: 20px solid blue; /* borde visible */
+  padding: 25px; /* espacio entre border y contenido */
+  width: 200px; /* ancho de la caja o box */
+  height: 200px; /* alto de la caja o box */
+  background-color: lightgreen; /* padding box visible */
+  position: relative;
+}
+
+
+
+/* Contenido : puede ser otro div y dentro de otro div */
+.content {
+  width: 100%;
+  height: 100%;
+  background-color: orange; /* content box visible */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+/* Visualización de las etiquetas de cada box */
+.box::before {
+  content: "Margin";
+  position: absolute;
+  top: -20px; /* justo encima de la caja */
+  left: 0;
+  background-color: rgba(237, 214, 8, 0.804);
+  padding: 2px 5px;
+}
+
+.box::after {
+  content: "Border";
+  position: absolute;
+  top: 40px;
+  left: -10px; /* borde izquierdo */
+  background-color: rgba(237, 214, 8, 0.804);
+  padding: 2px 5px;
+}
