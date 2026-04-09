@@ -1,0 +1,487 @@
+@{Layout = null;}
+@using AppProveedores.UTI.VarGlobal;
+
+
+<style>
+    .trash-container {
+        position: relative;
+        width: 45px;
+        height: 33px;
+        margin: 0 auto;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .trash-can {
+        /*bottom: 0;*/
+        width: 22px;
+        height: 22px;
+        background-color: red;
+        border-radius: 0 0 7px 7px;
+        text-align: -webkit-center;
+        display: inline-flex;
+        justify-content: center;
+    }
+
+    .trash-lid {
+        width: 28px;
+        height: 4px;
+        background-color: red;
+        border-radius: 5px 5px 5px 5px;
+        margin-bottom: 2px;
+    }
+
+    .line {
+        width: 2.5px;
+        height: 12px;
+        background-color: white;
+        margin-right: 0.15rem;
+        margin-left: 0.15rem;
+        margin-top: 5px;
+        border-radius: 8px;
+    }
+
+    .trapecio {
+        width: 10px;
+        height: 0;
+        border-bottom: 5px solid red;
+        border-left: 2px solid transparent;
+        border-right: 2px solid transparent;
+    }
+
+    .newlid {
+        text-align: -webkit-center;
+        transition: transform 0.3s ease;
+        transform-origin: right bottom;
+    }
+
+    .trash-container:hover .newlid {
+        animation: moveTrash 2s infinite; /*transform: rotate(+45deg);*/
+    }
+
+    .tachado {
+        text-decoration: line-through;
+        color: red;
+    }
+
+    .tracking {
+        cursor: pointer;
+        margin-left: 8px;
+        margin-right: -18px;
+        position: relative; /* Position relative to parent for contained positioning */
+        display: inline-block; /* Ensure inline-block for alignment */
+        width: 100px; /* Set a fixed width to ensure consistency */
+        height: 44px; /* Set a fixed height to ensure consistency */
+    }
+
+    .pathstates {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* Maintain aspect ratio */
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .gps {
+        transition: all 0.5s ease;
+        position: absolute;
+        top: -21px; /* Start at the top of the container */
+        left: 7.5px; /* Start at the left of the container */
+        width: 59%; /* Adjust size relative to parent */
+        height: auto; /* Maintain aspect ratio */
+        z-index: 1; /* Ensure it is above pathstates */
+    }
+
+    .tracking:hover .gps {
+        animation: moveAlongPath 4s infinite;
+    }
+
+    .fila-seleccionada {
+        background-color: #cce5ff !important; /* celeste */
+    }
+
+
+    @keyframes moveAlongPath {
+        0% {
+            transform: translate(0%, 0%);
+        }
+        25% {
+            transform: translate(24%, -36%);
+        }
+        50% {
+            transform: translate(56%, -20%);
+        }
+        75% {
+            transform: translate(85%, -45%);
+        }
+        100% {
+            transform: translate(0%, 0%);
+        }
+    }
+
+
+
+        @keyframes moveTrash {
+            0% {
+                transform: rotate(0deg);
+            }
+
+
+
+            50% {
+                transform: rotate(+45deg);
+            }
+
+
+
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+</style>
+<!-- Placeholder for the trash icon template -->
+<div id="trashIconTemplate" style="display: none;">
+    <div class="trash-container" id="slnkTrashUNIQUE_ID">
+        <div>
+            <div class="newlid">
+                <div class="trapecio"></div>
+                <div class="trash-lid"></div>
+            </div>
+            <div class="trash-can">
+                <div class="line"></div>
+                <div class="line"></div>
+                @*<div class="line"></div>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="trackingIconTemplate" style="display: none;">
+    <div class="tracking" id="slnkTrackingUNIQUE_ID">
+        <img class="gps" src="~/Content/assets/images/gps.png">
+        <img class="pathstates" src="~/Content/assets/images/pathstates.png">
+    </div>
+</div>
+
+
+
+<div class="card-body border-bottom-dashed border-bottom">
+    <form>
+        <div class="row g-3 pb-2">
+
+            @*1ra Fila*@
+            <div class="row pb-2">
+                <label for="txtProveedor" class="col-sm-1 col-form-label">Proveedor</label>
+                <div class="col-sm-4">
+                    @*<input type="hidden" id="hdcod_Proveedor" name="cod_proveedor" />*@
+                    <input type="hidden" id="FromDashProv" value="@ViewBag.FromDashProvee" />
+                    <input type="hidden" id="FromDashOC" value="@ViewBag.FromDashOrdCompra" />
+                    <input type="hidden" id="FromDashNroEntregas" value="@ViewBag.FromDashNroEntregas" />
+                    <input type="hidden" id="FromDashUserProfileType" value="@ViewBag.UserProfileType" />
+                    <input type="hidden" id="FromDashUserID" value="@ViewBag.UserID" />
+                    <input type="hidden" id="FromDashGuiaOrHes" value="@ViewBag.GuiaOrHes" />
+                    <input type="hidden" id="FromDashNroHES" value="@ViewBag.FromDashNroHES" />
+
+                    <input type="hidden" id="hdcod_Proveedor" name="cod_proveedor" />
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="txtProveedor" name="txtProveedor" readonly />
+                        <button class="btn btn-info" id="btn-buscar-Proveedor" type="button"><i class="ri-truck-fill me-2 align-bottom"></i>Buscar</button>
+                    </div>
+
+                </div>
+
+
+                <div class="col-sm-3">
+
+                </div>
+
+                <label for="cboSociedad" class="col-sm-1 col-form-label">Sociedad</label>
+                <div class="col-sm-2">
+                    <select class="form-select" id="cboSociedad" name="Sociedad">
+
+                        @{
+                            if (ViewBag.UserProfileType == UTI_VarGlobal.Constant.ProfileType.Admin)
+                            {
+                                <option value="1000">SPM</option>
+                                <option value="2000">CMC</option>
+                                <option value="3000">AOM</option>
+                            }
+                            else
+                            {
+                                <option value="%">Todos</option>
+                                <option value="1000">SPM</option>
+                                <option value="2000">CMC</option>
+                                <option value="3000">AOM</option>
+                            }
+
+
+                        }
+
+
+                    </select>
+                </div>
+            </div>
+
+
+            @*2da Fila*@
+            <div class="row pb-2" style="align-items: center;">
+                <label for="txtTipoDoc" class="col-sm-1 col-form-label">Tipo Doc.</label>
+                <div class="col-sm-2">
+                    <select class="form-select" id="cboTipoDoc" name="TipoDoc">
+
+                        @*<option value="%">Todos</option>*@
+                        <option value="01">Factura</option>
+                        @*<option value="02">RH</option>*@
+                        @*<option value="03">Boleta</option>*@
+
+
+                    </select>
+                </div>
+
+
+                <label for="txtNroDoc" class="col-sm-1 col-form-label">Nro Doc.</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="txtNroDoc" name="txtNroDoc" />
+                </div>
+
+
+                <div class="col-sm-2">
+                </div>
+
+
+                <label class="col-sm-1 col-form-label"> Nro. Orden Compra </label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" id="txtNroOrdenCompraBus" name="txtNroOrdenCompraBus" pattern="\d*" />
+                </div>
+
+            </div>
+
+            @*3ra Fila *@
+        <div class="row pb-2" style="align-items: center;">
+
+            <label for="dtpFechaDesde" class="col-sm-1 col-form-label">Fecha Reg. Desde </label>
+            <div class="col-sm-2" id="FechaDesdeRegIniDiv">
+                <div class="flatpickr input-group">
+                    <input type="text" id="FechaDesdeReg" placeholder="Seleccionar Fecha.." data-input class="form-control">
+                    <a class="input-group-text" fill="#000" title="toggle">
+                        <i class="ri-calendar-event-fill"></i>
+                    </a>
+                </div>
+            </div>
+
+            
+
+            <label for="dtpFechaHasta" class="col-sm-1 col-form-label">Fecha Reg. Hasta </label>
+            <div class="col-sm-2" id="FechaHastaRegDiv">
+                <div class="flatpickr input-group">
+                    <input type="text" id="FechaHastaReg" placeholder="Seleccionar Fecha.." data-input class="form-control">
+                    <a class="input-group-text" fill="#000" title="toggle">
+                        <i class="ri-calendar-event-fill"></i>
+                    </a>
+                </div>
+            </div>
+
+
+            <div class="col-sm-2">
+
+            </div>
+
+            <div class="col-sm-1 col-form-label">
+                <label for="scboEstado">Estado</label>
+            </div>
+
+
+
+            <div class="col-sm-2">
+                <select class="form-select" id="cboEstados" name="Estados">
+                    <option value="%">Todos</option>
+                    <option value="REG">Recepcionado</option>
+                    <option value="APR">Recibido Conforme</option>
+                    <option value="ANU">Anulado</option>
+                    <option value="OBS">Observado</option>
+
+                </select>
+            </div>
+
+
+        </div>
+
+
+
+
+            @*4ta Fila*@
+            <div class="row pb-2">
+                <div class="col-sm-1">
+
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="form-check" id="chkDatosContabCab">
+                        <input class="form-check-input" type="checkbox" id="chkDatosContab">
+                        <label class="form-check-label" for="chkDatosContab">Mostrar con Datos contables</label>
+                    </div>
+                </div>
+
+            </div>
+
+            @*5ta Fila*@
+            <div class="row pb-2">
+
+                <label for="txtClasOrd" class="col-sm-1 col-form-label">Clase Orden</label>
+                <div class="col-sm-2">
+                    <select class="form-select" id="cboClassOrden" name="ClassOrden">
+
+                        <option value="%">Todos</option>
+                        <option value="ZNB">Pedido Estándar(ZNB)</option>
+                        <option value="ZSER">Pedido de Servicio(ZSER)</option>
+                        <option value="ZOS">Pedido de Contratos(ZOS)</option>
+                        <option value="ZSUB">Pedido de Reparación(ZSUB)</option>
+
+
+                    </select>
+                </div>
+
+            </div>
+
+
+            @*6ta Fila*@
+            <div class="row pb-2">
+
+                <label for="txtMotAnul" class="col-sm-1 col-form-label">Motivo Anulación</label>
+                <div class="col-sm-3">
+                    <select class="form-select" id="cboMotAnul" name="MotAnul">
+
+                        <option value="%">Todos</option>
+                        <option value="01">GR - Error en Adjunto</option>
+                        <option value="02">GR - Falta sello en Guía</option>
+                        <option value="03">GR - Guía escaneada no legible</option>
+                        <option value="04">GR - Falto agregar guias de otros items</option>
+                        <option value="05">FE - Error en Adjunto</option>
+                        <option value="06">FE - Datos en Factura diferentes a OC</option>
+                        <option value="07">XML - Error en Adjunto</option>
+                        <option value="08">CDR - Error en Adjunto</option>
+                        <option value="09">CPE - Datos son incorrectos</option>
+                        <option value="10">CPE - Estado Incorrecto</option>
+                        <option value="12">CPE - Error en Adjunto</option>
+                        <option value="13">No Adjunto Correctamente los Doc.</option>
+                        <option value="11">Otros</option>
+
+
+                    </select>
+                </div>
+
+            </div>
+
+            @*7ma Fila*@
+            <div class="row pb-2" style="justify-content:flex-end">
+
+
+                <div class="col-sm-1">
+                    <button type="button" class="btn btn-info w-100" id="sbtnBuscar"><i class="ri-search-line search-icon me-2 align-bottom"></i>Buscar</button>
+                </div>
+
+                <div class="col-sm-1">
+                    <button type="button" class="btn btn-success w-100" id="sbtnExcel"><i class="ri-file-excel-2-line search-icon me-2 align-bottom"></i>Excel</button>
+                </div>
+
+                <div class="col-sm-1">
+                    <button type="button" class="btn btn-info w-100" id="sbtnLimpiar"><i class="ri-brush-2-fill me-2 align-bottom"></i>Limpiar</button>
+                </div>
+
+                @*<div class="col-sm-1">
+                    <button type="button" class="btn btn-info w-100" id="sbtnNuevo"><i class="ri-file-add-fill me-2 align-bottom"></i>Nuevo</button>
+                </div>*@
+
+
+            </div>
+
+        </div>
+    </form>
+</div>
+
+@Html.Partial("FrmModalProveedorBuscar")
+
+@{
+    if (ViewBag.UserProfileType == UTI_VarGlobal.Constant.ProfileType.Admin)
+    {
+
+
+        <div class="card-body">
+            <div class="table-responsive table-card mb-1">
+                <table class="table align-middle">
+                    <thead class="table-light text-muted">
+                        <tr>
+                            <th rowspan="2" class="text-center" style="vertical-align: middle;">Fecha de Registro</th>
+                            <th class="text-center" style="vertical-align: middle;">Fecha Emisión</th>
+                            <th class="text-center" style="vertical-align: middle;">Ruc</th>
+                            <th class="text-center" style="vertical-align: middle;">Proveedor</th>
+                            <th class="text-center" style="vertical-align: middle;">Sociedad</th>
+                            <th class="text-center" style="vertical-align: middle;">Tipo Documento</th>
+                            <th class="text-center" style="vertical-align: middle;">N° Documento</th>
+                            <th class="text-center" style="vertical-align: middle;">Moneda</th>
+                            <th class="text-center" style="vertical-align: middle;">Total</th>
+                            <th class="text-center" style="vertical-align: middle;">Clase Orden</th>
+                            <th class="text-center" style="vertical-align: middle;">Nro. OC</th>
+                            <th class="text-center" style="vertical-align: middle;">Guías/HES</th>
+                            <th class="text-center" style="vertical-align: middle;">Estado</th>
+                            <th class="text-center" style="vertical-align: middle;">Nro. Doc MIRO</th>
+                            <th class="text-center" style="vertical-align: middle;">Nro. Doc FI</th>
+                            <th class="text-center" style="vertical-align: middle;">Motivo Anulación</th>
+                            <th class="text-center" style="vertical-align: middle;">*</th>
+                            <th class="text-center" style="vertical-align: middle;">*</th>
+                        </tr>
+                    </thead>
+                    <tbody id="details-list-proveedor">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+
+
+        <div class="card-body">
+            <div class="table-responsive table-card mb-1">
+                <table class="table align-middle">
+                    <thead class="table-light text-muted">
+                        <tr>
+                            <th rowspan="2" class="text-center" style="vertical-align: middle;">Fecha de Registro</th>
+                            <th class="text-center" style="vertical-align: middle;">Fecha Emisión</th>
+                            @*<th class="text-center" style="vertical-align: middle;">Ruc</th>*@
+                            @*<th class="text-center" style="vertical-align: middle;">Proveedor</th>*@
+                            @*<th class="text-center" style="vertical-align: middle;">Tipo Documento</th>*@
+                            <th class="text-center" style="vertical-align: middle;">N° Documento</th>
+                            <th class="text-center" style="vertical-align: middle;">Moneda</th>
+                            <th class="text-center" style="vertical-align: middle;">Total</th>
+                            <th class="text-center" style="vertical-align: middle;">Clase Orden</th>
+                            <th class="text-center" style="vertical-align: middle;">Nro. OC</th>
+                            <th class="text-center" style="vertical-align: middle;">Guías/HES</th>
+                            <th class="text-center" style="vertical-align: middle;">Estado</th>
+                            @*<th class="text-center" style="vertical-align: middle;">Nro. Doc MIRO</th>*@
+                            <th class="text-center" style="vertical-align: middle;">Nro. Doc FI</th>
+                            <th class="text-center" style="vertical-align: middle;">Motivo Anulación</th>
+                            <th class="text-center" style="vertical-align: middle;">*</th>
+                            <th class="text-center" style="vertical-align: middle;">*</th>
+                            <th class="text-center" style="vertical-align: middle;">*</th>
+                        </tr>
+                    </thead>
+                    <tbody id="details-list-proveedor">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+
+
+
+
+
+}
+
+
+
+
+@Html.Partial("FrmModalTracking")

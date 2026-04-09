@@ -1,0 +1,124 @@
+@{ Layout = null; }
+
+
+    @*<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />*@
+
+
+
+<style>
+
+
+    .slider {
+        width: 90%;
+        place-self: center;
+    }
+
+    .slick-slide {
+        /*text-align: center;*/
+        color: #fff;
+        /*background: #05427a;*/
+        display: flex;
+        justify-content: center;
+        /*align-items: center;*/
+        height: 270px;
+        /*font-size: 24px;*/
+    }
+
+    .tituloFase{
+        text-align:center;
+    }
+
+</style>
+<div class="modal fade" id="ModalTracking" tabindex="-1" aria-labelledby="titulo-proveedor" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 690px;"> @*670*@
+        <div class="modal-content">
+            <div class="modal-body" style="height: 670px;"> @*620*@
+                <div class="table-responsive">
+
+                    <div class="tracking-container-fases" style="margin-top:5px;">
+                        <div class="tituloFase">
+                            <div class="label">Estado Registro</div>
+                        </div>
+                        <div class="tituloFase">
+                            <div class="label">Factura Aceptada</div>
+                        </div>
+                        <div class="tituloFase">
+                            <div class="label">Por programar pago</div>
+                        </div>
+                        <div class="tituloFase">
+                            <div class="label">Pagado</div>
+                        </div>
+                    </div>
+
+
+                    <div class="tracking-container">
+                        <div class="lupaTracking" id="lupaTracking"></div>
+
+                        <div class="fase completed" id="Fase1">
+                            <div class="circle" id="circle1">1</div>
+                        </div>
+                        <div class="fase" id="Fase2">
+                            <div class="circle" id="circle2">2</div>
+                        </div>
+                        <div class="fase" id="Fase3">
+                            <div class="circle" id="circle3">3</div>
+                        </div>
+                        <div class="fase" id="Fase4">
+                            <div class="circle" id="circle4">4</div>
+                        </div>
+                    </div>
+
+
+                    <div class="rectangleTrancking1" style="flex-flow:column">
+                        <div class="custom-ri-box-3-line" id="boxTracking"></div>
+                        <span class="rectangle-text" id="TxtTrackingPrincipal"></span>
+                        <span class="rectangle-text-fase-4" id="TxtTrackingFase4NumPagos"></span>
+                    </div>
+
+                    <div class="flechasTracking">
+                        <div class="rectangleTrancking2">
+                            <div class="msjTrancking">
+                                <span id="Label1" class="label"></span>
+                                <span id="RespLabel1" class="respLabel"></span>
+                            </div>
+
+                            <div class="msjTrancking">
+                                <span id="Label2" class="label"></span>
+                                <span id="RespLabel2" class="respLabel"></span>
+                            </div>
+
+                            <div class="msjTrancking">
+                                <span id="Label3" class="label"></span>
+                                <span id="RespLabel3" class="respLabel"></span>
+                            </div>
+
+                            <div class="msjTrancking">
+                                <span id="Label4" class="label"></span>
+                                <span id="RespLabel4" class="respLabel"></span>
+                            </div>
+
+                            <div class="msjTrancking">
+                                <span id="Label5" class="label"></span>
+                                <span id="RespLabel5" class="respLabel"></span>
+                            </div>
+
+                            <div class="slider"></div>
+
+                        </div>
+                    </div>
+                    
+
+
+                    <button class="btn btn-secondary" id="prevStepButton">
+                        <i class="ri-arrow-left-s-line"></i>
+                    </button>
+                    <button class="btn btn-secondary" id="nextStepButton">
+                        <i class="ri-arrow-right-s-line"></i>
+                    </button>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

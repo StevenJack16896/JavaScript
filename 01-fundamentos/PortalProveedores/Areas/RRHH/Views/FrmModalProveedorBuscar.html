@@ -1,0 +1,42 @@
+@{ Layout = null; }
+<div class="modal fade" id="modal-proveedor-buscar" tabindex="-1" aria-labelledby="titulo-proveedor" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header bg-light p-2">
+                <h5 class="modal-title" id="titulo-ubicacion">BUSCAR PROVEEDOR</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-2">
+                    <div class="col-lg-6">
+                        <label for="txt-Modal-RUC" class="form-label">RUC</label>
+                        <input class="form-control" type="text" id="txt-Modal-RUC" />
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="txt-Modal-Proveedor" class="form-label">Proveedor</label>
+                        <input class="form-control" type="text" id="txt-Modal-Proveedor" />
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table" id="grilla-Modal-Proveedor">
+                        <thead class="table-light">
+                            <tr>
+                                <th style="width:30px"></th>
+                                <th>Código</th>
+                                <th>Proveedor</th>
+                            </tr>
+                        </thead>
+                        <tbody id="list-proveedor">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="hstack gap-2 justify-content-end">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btn-modal-proveedor-cerrar"><i class="ri-close-fill align-bottom"></i>Cerrar</button>
+                    <button type="button" class="btn btn-success" id="btn-modal-proveedor-aceptar"><i class="ri-check-fill align-bottom"></i>Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

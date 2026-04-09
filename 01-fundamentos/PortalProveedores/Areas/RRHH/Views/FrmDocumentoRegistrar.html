@@ -1,0 +1,779 @@
+@{Layout = null;}
+@using AppProveedores.UTI.VarGlobal;
+<style>
+    .trash-container {
+        position: relative;
+        width: 45px;
+        height: 33px;
+        margin: 0 auto;
+        text-align: center;
+        cursor: pointer;
+    }
+
+
+    .trash-can {
+        /*bottom: 0;*/
+        width: 22px;
+        height: 22px;
+        background-color: red;
+        border-radius: 0 0 7px 7px;
+        text-align: -webkit-center;
+        display: inline-flex;
+        justify-content: center;
+    }
+
+    .trash-lid {
+        width: 28px;
+        height: 4px;
+        background-color: red;
+        border-radius: 5px 5px 5px 5px;
+        margin-bottom: 2px;
+    }
+
+    .line {
+        width: 2.5px;
+        height: 12px;
+        background-color: white;
+        margin-right: 0.15rem;
+        margin-left: 0.15rem;
+        margin-top: 5px;
+        border-radius: 8px;
+    }
+
+    .trapecio {
+        width: 10px;
+        height: 0;
+        border-bottom: 5px solid red;
+        border-left: 2px solid transparent;
+        border-right: 2px solid transparent;
+    }
+
+
+    .newlid {
+        text-align: -webkit-center;
+        transition: transform 0.3s ease;
+        transform-origin: right bottom;
+    }
+
+    .trash-container:hover .newlid {
+        animation: moveTrash 2s infinite; /*transform: rotate(+45deg);*/
+    }
+
+
+    @keyframes moveTrash {
+        0% {
+            transform: rotate(0deg);
+        }
+
+
+
+        50% {
+            transform: rotate(+45deg);
+        }
+
+
+
+        100% {
+            transform: rotate(0deg);
+        }
+    }
+
+</style>
+
+<div id="trashIconTemplate_Buscar" style="display: none;">
+    <div class="trash-container trashIcon" id="slnkTrashBuscarUNIQUE_ID_BUSCAR" IdfileInput="IdfileInputUNIQUE">
+        <div>
+            <div class="newlid">
+                <div class="trapecio"></div>
+                <div class="trash-lid"></div>
+            </div>
+            <div class="trash-can">
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="card-body border-bottom-dashed border-bottom">
+    <form>
+        <div class="border-bottom-dashed border-bottom">
+            <i class="ri-arrow-right-s-fill me-2 align-bottom"></i> INFORMACIÓN DEL DOCUMENTO
+            <input type="hidden" id="FromDashProvReg" value="@ViewBag.FromDashProvee" />
+            <input type="hidden" id="FromDashRucFullName" value="@ViewBag.fullName" />
+            <input type="hidden" id="FromUserProfileTypeReg" value="@ViewBag.UserProfileType" />
+            <input type="hidden" id="FromEyeIdDocument" value="" />
+            <input type="hidden" id="CurrentDate" value="@ViewBag.CurrentDate" />
+            <input type="hidden" id="FromSearchCabIdProvee" value="" />
+            <input type="hidden" id="FromSearchCabRazonSocial" value="" />
+            <input type="hidden" id="FromEyesEstado" value="" />
+            <input type="hidden" id="FromEyesMotObs" value="" />
+            <input type="hidden" id="FromEyesComent" value="" />
+            <input type="hidden" id="MaxSize" value="@ViewBag.MaxSize" />
+            <input type="hidden" id="XMLNroDoc" value="" />
+            <input type="hidden" id="XMLFechaEmision" value="" />
+        </div>
+        <br>
+        <div class="">
+
+            <div> 1. ORDEN DE COMPRA</div>
+
+            @*1ra Fila*@
+            <div class="row g-3 pb-2">
+                <label for="txtNroOrdenReg" class="col-sm-1 col-form-label">Nro Orden de Compra</label>
+
+                <div class="col-sm-2">
+                    <input type="text" id="txtNroOrdenReg" name="txtNroOrdenReg" class="form-control" disabled />
+                </div>
+
+                <div class="col-sm-1">
+                </div>
+
+                <label for="cboSociedad" class="col-sm-1 col-form-label">Sociedad</label>
+                <div class="col-sm-2">
+                    <select class="form-select" id="cboSociedadReg" name="SociedadReg">
+                        <option value="%">Todos</option>
+                        <option value="1000">SPM</option>
+                        <option value="2000">CMC</option>
+                        <option value="3000">AOM</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-2">
+              
+                </div>
+
+                <label for="txtClasOrdReg" class="col-sm-1 col-form-label">Clase Orden</label>
+                <div class="col-sm-2">
+                    <select class="form-select" id="cboClassOrdenReg" name="ClassOrdenReg">
+                        <option value="%">Todos</option>
+                        <option value="ZNB">Pedido Estándar(ZNB)</option>
+                        <option value="ZSER">Pedido de Servicio(ZSER)</option>
+                        <option value="ZOS">Pedido de Contratos(ZOS)</option>
+                        <option value="ZSUB">Pedido de Reparación(ZSUB)</option>
+                    </select>
+                </div>
+            </div>
+
+
+            @*2da Fila*@
+            <div class="row g-3 pb-2">
+                <label for="txtFechEmiReg" class="col-sm-1 col-form-label">Fecha Emisión</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="txtNroOrdenCompra" name="txtNroOrdenCompra" disabled />
+                </div>
+
+                <div class="col-sm-1">
+                </div>
+
+                <label for="txtMonedaReg" class="col-sm-1 col-form-label">Moneda</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="txtMonedaReg" name="txtMonedaReg" disabled />
+                </div>
+
+                <div class="col-sm-2">
+                </div>
+
+
+                <label for="txtSubTotReg" class="col-sm-1 col-form-label">SubTotal</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="txtSubTotReg" name="txtSubTotReg" disabled />
+                </div>
+            </div>
+
+            @*3ra Fila*@
+            <div class="row g-3 pb-2">
+                <label for="txtVisuaOCReg" class="col-sm-1 col-form-label">Visualizar OC</label>
+                <div class="col-sm-3 col-form-label">
+                    <a href="javascript:void(0)" style="color:blue; cursor:pointer" id="openPdfButton">
+                        Ver OC
+                    </a>
+                </div>
+
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="txtVerifyOC" name="txtVerifyOC" style="display: none;" disabled />
+                </div>
+
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+
+<div class="card-body border-bottom-dashed border-bottom">
+
+    <form>
+        @*1ra Fila*@
+        <div class="row g-3 pb-2">
+
+
+            <div class="col-sm-2">2. INGRESOS ASOCIADOS</div>
+
+            <div class="col-sm-3">
+            </div>
+
+
+            <label for="txtValTotIngReg" class="col-sm-1 col-form-label">Valor total Ingresos:</label>
+            <div class="col-sm-3" style="align-content: center;">
+                <input type="text" class="form-control" id="txtValTotIngReg" name="txtValTotIngReg" disabled />
+            </div>
+
+        </div>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr class="table-light text-muted">
+                    <th scope="col" style="text-align:center;">Ingreso SAP</th>
+                    <th scope="col" style="text-align:center;">Fecha de Documento</th> @*Nuevo - BLDAT*@
+                    <th scope="col" style="text-align:center;">Fecha de Contabilización</th> @*BUDAT*@
+                    <th scope="col" style="text-align:center;">Moneda</th>
+                    <th scope="col" style="text-align:center;">Importe Total</th>
+                    <th scope="col" style="text-align:center;" id="GuiaorHesReg"></th> @*LFBNR (HES)*@
+                    <th scope="col" style="text-align:center;" id="AnularDet">*</th>
+                    <th scope="col" style="text-align:center;">*</th>
+                    <th id="NombPDF" scope="col" style="text-align:center;">Nombre PDF</th>
+                </tr>
+            </thead>
+            <tbody id="details-list-documento-reg">
+            </tbody>
+        </table>
+
+
+
+        <div id="btn-Subir-SUS-Cab" style="display:flex;">
+                
+            <button class="btn btn-info" id="btn-Subir-PDF-SUS" type="button" style="margin-right: 2rem;">
+                <i class="ri-upload-cloud-fill me-2 align-bottom"></i>Subir Sustento
+            </button>
+
+            <div class="col-sm-3" style="margin-right: 2rem;">
+                <input type="file" class="form-control" id="fileInputPDFSUS" accept=".pdf">
+            </div>
+            <div class="col-sm-2" style="margin-right: 2rem;">
+                <input type="text" class="form-control" id="txtPDFSUSReg" name="txtPDFSUSReg" style="font-size: smaller;" disabled />
+            </div>
+            
+
+            <div class="col-sm-2 col-form-label">
+                <a href="javascript:void(0)" style="color:blue; cursor:pointer" id="downloadPDFSUS">
+                    Ver Sustento
+                </a>
+            </div>
+
+
+        </div>
+
+        
+
+
+        <div class="row g-3 pb-2" id="ArquiPDFAntiguo" style="display:none">
+            <label for="txtIngReg" class="col-sm-1 col-form-label">Adjuntar Ingresos</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="txtIngReg" name="txtIngReg" disabled />
+            </div>
+
+            <div class="col-sm-3">
+
+            </div>
+
+            <div class="col-sm-3">
+                <input class="form-control" id="btn-buscar-Ingreso" type="file" />
+                <button class="btn btn-info" id="btn-cargar-Ingreso" type="button"><i class="ri-upload-cloud-fill me-2 align-bottom"></i>Cargar Ingreso</button>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+<div class="card-body border-bottom-dashed border-bottom">
+    <form>
+        @*1ra Fila*@
+        <div class="row g-3 pb-2">
+            <div class="col-sm-2">3. DOCUMENTO ELECTRÓNICO</div>
+
+            <div class="col-sm-2">
+
+            </div>
+
+            <label for="txtEstReg" class="col-sm-1 col-form-label">Estado</label>
+            <div class="col-sm-2">
+                <select class="form-select" id="cboEstadosReg" name="EstadosReg">
+                    <option value="%">Todos</option>
+                    <option value="REG">Recepcionado</option>
+                    <option value="APR">Recibido Conforme</option>
+                    <option value="ANU">Anulado</option>
+                    <option value="OBS">Observado</option>
+                </select>
+            </div>
+
+            <div class="col-sm-2">
+            </div>
+
+            <label for="txtFecRegReg" class="col-sm-1 col-form-label">Fecha Registro</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="txtFecRegReg" name="txtFecRegReg" disabled />
+            </div>
+        </div>
+
+        @*2da Fila*@
+        <div class="row g-3 pb-2">
+
+            <label for="txtTipDocReg" class="col-sm-1 col-form-label">Tipo Documento</label>
+            <div class="col-sm-2">
+                <select class="form-select" id="cboTipDocReg" name="TipDocReg">
+                    <option value="%">Todos</option>
+                    <option value="01">Factura</option>
+                    <option value="02">RH</option>
+                    <option value="03">Boleta</option>
+
+                </select>
+            </div>
+
+            <div class="col-sm-1">
+            </div>
+
+            <label for="txtNroDocReg" class="col-sm-1 col-form-label">Nro Documento</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="txtNroDocReg" name="txtNroDocReg" disabled />
+            </div>
+
+            <div class="col-sm-2">
+            </div>
+
+            <label for="txtFecEmiReg" class="col-sm-1 col-form-label">Fecha Emisión</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="txtFecEmiReg" name="txtFecEmiReg" disabled />
+            </div>
+
+        </div>
+        @*3ra Fila*@
+        <div class="row g-3 pb-2">
+
+
+            <label for="txtMonDocReg" class="col-sm-1 col-form-label">Moneda Documento</label>
+            <div class="col-sm-2">
+                <select class="form-select" id="cboMonDocReg" name="MonDocReg">
+                    <option value="%">Todos</option>
+                    <option value="PEN">Soles</option>
+                    <option value="USD">Dólares</option>
+                </select>
+            </div>
+            <div class="col-sm-1">
+
+            </div>
+            <label for="txtSubTotReg3" class="col-sm-1 col-form-label">Sub Total</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="txtSubTotReg3" name="txtSubTotReg3" disabled />
+            </div>
+            <div class="col-sm-2">
+
+            </div>
+            <label for="txtImpTotReg" class="col-sm-1 col-form-label">Importe Total</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="txtImpTotReg" name="txtImpTotReg" disabled />
+            </div>
+
+
+        </div>
+
+        @*4ta Fila*@
+
+    <div class="row g-3">
+        <input type="hidden" id="XML_Hidden" name="XML_Hidden" />
+        <label for="txtXMLReg" class="col-sm-1 col-form-label">XML</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="txtXMLReg" name="txtXMLReg" style="font-size: smaller;" disabled />
+        </div>
+
+        <div class="col-sm-1">
+        </div>
+
+        <input type="hidden" id="CDR_Hidden" name="CDR_Hidden" />
+        <label for="txtCDRReg" class="col-sm-1 col-form-label">CDR o CPE SUNAT</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="txtCDRReg" name="txtCDRReg" style="font-size: smaller;" disabled />
+        </div>
+
+        <div class="col-sm-2">
+        </div>
+
+        <label for="txtPDFReg" class="col-sm-1 col-form-label">PDF</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="txtPDFReg" name="txtPDFReg" style="font-size: smaller;" disabled />
+        </div>
+
+        <div class="col-sm-3">
+        </div>
+    </div>
+
+        <div class="row g-3 pb-2" id="btnsDownloadXmlCdrPdf">
+
+            <div class="col-sm-1">
+            </div>
+
+            <div class="col-sm-2 col-form-label">
+                <a href="javascript:void(0)" style="color:blue; cursor:pointer" id="downloadXML">
+                    Ver XML
+                </a>
+            </div>
+
+            <div class="col-sm-2">
+            </div>
+
+
+            <div class="col-sm-2 col-form-label">
+                <a href="javascript:void(0)" style="color:blue; cursor:pointer" id="downloadCDR">
+                    Ver CDR
+                </a>
+            </div>
+
+            <div class="col-sm-3">
+            </div>
+
+            <div class="col-sm-2 col-form-label">
+                <a href="javascript:void(0)" style="color:blue; cursor:pointer" id="downloadPDF">
+                    Ver PDF
+                </a>
+            </div>
+
+        </div>
+        
+
+        <div class="row g-3 pb-2" id="btnsSubirXmlCdrPdf">
+            <div class="col-sm-3">
+                <input type="file" class="form-control" id="fileInputXML" accept=".xml" />
+                <button class="btn btn-info" id="btn-Subir-XML" type="button"><i class="ri-upload-cloud-fill me-2 align-bottom"></i>Subir XML</button>
+            </div>
+
+            <div class="col-sm-1">
+            </div>
+
+            <div class="col-sm-3" id="btn-Subir-CDR-Cab">
+                <input type="file" class="form-control" id="fileInputCDR" accept=".xml,.pdf" />
+                <button class="btn btn-info" id="btn-Subir-CDR" type="button"><i class="ri-upload-cloud-fill me-2 align-bottom"></i>Subir CDR</button>
+            </div>
+
+            <div class="col-sm-2">
+            </div>
+
+            <div class="col-sm-3" id="btn-Subir-PDF-Cab">
+                <input type="file" class="form-control" id="fileInputPDF" accept=".pdf" />
+                <button class="btn btn-info" id="btn-Subir-PDF" type="button"><i class="ri-upload-cloud-fill me-2 align-bottom"></i>Subir PDF</button>
+            </div>
+
+        </div>
+
+
+
+
+    </form>
+</div>
+
+<div class="card-body border-bottom-dashed border-bottom">
+    <form>
+        <div class="row g-3 pb-2">
+            <div class="col-sm-8" style="display:flex;">
+                <div class="col-sm-2"> 4. CONFORMIDAD</div>
+                <div class="col-sm-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="chkConforReg">
+                    </div>
+                </div>
+            </div>
+
+            @{
+                if (ViewBag.UserProfileType != UTI_VarGlobal.Constant.ProfileType.Proveedor)
+                {
+                    <label for="txtAudiUsuario" class="col-sm-2 col-form-label" style="text-align:center;">Usuario</label>
+                    <label for="txtAudiFechaHora" class="col-sm-2 col-form-label" style="text-align:center;">Fecha Hora</label>
+                }
+            }
+
+        </div>
+        <div class="row pb-2">
+            <div class="col-sm-7 ConfNoProvee">
+                <label class="col-form-label p-0" style="color: blue;font-weight: bold;">*" En cumplimiento de las disposiciones tributarias sobre la fehaciencia de las operaciones comerciales, se declara la prestación efectiva del servicio y/o venta de bienes. Se da conformidad a los documentos enviados".</label>
+            </div>
+
+            @{
+                if (ViewBag.UserProfileType != UTI_VarGlobal.Constant.ProfileType.Proveedor)
+                {
+                    <label for="txtNroAudiObs" class="col-sm-1 col-form-label">Observación</label>
+                    <div class="col-sm-2">
+                        <input type="text" id="txtNroAudiObsUsu" name="txtNroAudiObsUsu" class="form-control" disabled />
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="text" id="txtNroAudiObsFec" name="txtNroAudiObsFec" class="form-control" disabled />
+                    </div>
+                }
+            }
+
+        </div>
+
+        <div class="row pb-2" style="align-items: center;">
+            <div class="col-sm-7 ConfNoProvee">
+                <label class="col-form-label p-0" style="color: blue;font-weight: bold;">** La condición de pago de la factura rige desde la fecha que la factura este en estado &quot;Recibido conforme&quot;.</label>
+            </div>
+
+            @{
+                if (ViewBag.UserProfileType != UTI_VarGlobal.Constant.ProfileType.Proveedor)
+                {
+                    <label for="txtNroAudiAnu" class="col-sm-1 col-form-label">Anulación</label>
+                    <div class="col-sm-2">
+                        <input type="text" id="txtNroAudiAnuUsu" name="txtNroAudiAnuUsu" class="form-control" disabled />
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="text" id="txtNroAudiAnuFec" name="txtNroAudiAnuFec" class="form-control" disabled />
+                    </div>
+                }
+            }
+
+        </div>
+
+        <div class="row pb-3" style="align-items: center;">
+            <div class="col-sm-7 ConfNoProvee">
+                <label class="col-form-label p-0" style="color: blue;font-weight: bold;">*** Es responsabilidad del Proveedor hacer el seguimiento del Estado de su factura en el Portal.</label>
+            </div>
+
+            @{
+                if (ViewBag.UserProfileType != UTI_VarGlobal.Constant.ProfileType.Proveedor)
+                {
+                    <label for="txtNroAudiApru" class="col-sm-1 col-form-label">Aprobación</label>
+                    <div class="col-sm-2">
+                        <input type="text" id="txtNroAudiAprUsu" name="txtNroAudiAprUsu" class="form-control" disabled />
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="text" id="txtNroAudiAprFec" name="txtNroAudiAprFec" class="form-control" disabled />
+                    </div>
+                }
+            }
+
+        </div>
+
+        <div id="CabConformidad" style="padding-bottom: 1.1rem;">
+            <div class="row g-3 pb-2">
+                <label for="txtMotObsReg" class="col-sm-1 col-form-label">Motivo Observación</label>
+                <div class="col-sm-2">
+                    <select class="form-select" id="cboMotObsReg" style="color:red;" name="MotObsReg">
+                        <option value="">Elegir un Motivo</option>
+                        <option value="01">GR - Error en Adjunto</option>
+                        <option value="02">GR - Falta sello en Guía</option>
+                        <option value="03">GR - Guía escaneada no legible</option>
+                        <option value="04">GR - Falto agregar guias de otros items</option>
+                        <option value="05">FE - Error en Adjunto</option>
+                        <option value="06">FE - Datos en Factura diferentes a OC</option>
+                        <option value="07">XML - Error en Adjunto</option>
+                        <option value="08">CDR - Error en Adjunto</option>
+                        <option value="09">CPE - Datos son incorrectos</option>
+                        <option value="10">CPE - Estado Incorrecto</option>
+                        <option value="12">CPE - Error en Adjunto</option>
+                        <option value="13">No Adjunto Correctamente los Doc.</option>
+                        <option value="11">Otros</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row g-3 pb-2">
+                <label for="txtComenReg" class="col-sm-1 col-form-label">Comentario</label>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <textarea class="form-control" style="color:red;" id="ConformidadComentarioTxtArea" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @{
+            if (ViewBag.UserProfileType == UTI_VarGlobal.Constant.ProfileType.Admin || ViewBag.UserProfileType == UTI_VarGlobal.Constant.ProfileType.Logística)
+            {
+                <div class="row">
+                    <label for="txt_seguimiento" class="form-label">Comentarios de Seguimiento</label>
+                    <div class="col-sm-6">
+                        <textarea class="form-control" id="txt_seguimiento" rows="4"></textarea>
+                    </div>
+                </div>
+            }
+        }
+
+
+
+
+    </form>
+
+</div>
+
+
+<div class="card-body border-bottom-dashed border-bottom" id="DocContabl">
+    <form>
+        <div class="row g-3 pb-2">
+            <div class="col-sm-2"> 5. DOCUMENTOS CONTABLES</div>
+
+            <div class="col-sm-4">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="chkConSAP">
+                    <label class="form-check-label" for="chkConSAP">¿Tiene Doc. Contables en SAP?</label>
+                </div>
+            </div>
+
+
+            <div class="col-sm-4">
+                <button class="btn btn-info" id="btn-Gen-Reg-SAP" type="button"><i class="ri-save-3-line me-2 align-bottom"></i>Generar Registro SAP</button>
+            </div>
+        </div>
+
+
+        <div class="row g-3 pb-2">
+            <label for="txtNroDocMIRO" class="col-sm-1 col-form-label">Nro Doc MIRO</label>
+            <div class="col-sm-2">
+                <input type="number" id="txtNroDocMIRO"  name="txtNroDocMIRO" class="form-control" />
+            </div>
+
+            <div class="col-sm-1">
+            </div>
+
+            <label for="txtNroDocFI" class="col-sm-1 col-form-label">Nro Doc FI</label>
+            <div class="col-sm-2">
+                <input type="number" id="txtNroDocFI" name="txtNroDocFI" class="form-control" />
+            </div>
+        </div>
+
+
+        <div class="row g-3 pb-2" >
+                                                                                                                        
+            <div class="col-sm-4">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="chkApliDetra">
+                    <label class="form-check-label" for="chkApliDetra">¿Aplica Detracción?</label>
+                </div>
+            </div>
+
+
+
+            <label for="txtMotObsReg" class="col-sm-1 col-form-label">Tipo Detracción</label>
+            <div class="col-sm-2">
+                <select class="form-select" id="cboTipoDetracc" name="cboTipoDetracc" disabled>
+
+                </select>
+            </div>
+
+
+        </div>
+
+
+
+
+        <div class="row g-3 pb-2" style="align-items: center; ">
+
+            <div class="col-sm-4">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="chkApliFondoGarant">
+                    <label class="form-check-label" for="chkApliFondoGarant">¿Aplica Fondo Garantía?</label>
+                </div>
+            </div>
+
+            <label for="txtMotObsReg" class="col-sm-1 col-form-label">Tipo Fondo Garantía</label>
+            <div class="col-sm-2">
+                <select class="form-select" id="cboTipoFondoGaranti" name="cboTipoFondoGaranti" disabled>
+
+                </select>
+            </div>
+
+
+        </div>
+
+
+        <div class="row g-3 pb-2">
+
+            <div class="col-sm-4">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" @*value=""*@ id="chkAgregCuenMayo">
+                    <label class="form-check-label" for="chkAgregCuenMayo">¿Agregar Cuenta Mayor?</label>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+        <div class="row g-3 pb-2">
+
+            <label for="txtDocContabCuen" class="col-sm-1 col-form-label">Cuenta</label>
+            <div class="col-sm-2">
+                <input type="text" id="txtDocContabCuen" name="txtDocContabCuen" class="form-control" disabled />
+            </div>
+
+            <div class="col-sm-1">
+            </div>
+
+            <label for="txtMotObsReg" class="col-sm-1 col-form-label">
+            /Haber</label>
+            <div class="col-sm-2">
+                <select class="form-select" id="cboDebeHaber" name="cboDebeHaber" disabled>
+                </select>
+            </div>
+
+            <div class="col-sm-2">
+            </div>
+
+
+            <label for="txtDocContabImport" class="col-sm-1 col-form-label">Importe</label>
+            <div class="col-sm-2">
+                <input type="text" id="txtDocContabImport" name="txtDocContabImport" class="form-control" pattern="\d*" disabled />
+                <!-- Contenedor para el mensaje de error -->
+                <span id="error-message" style="color: red; display: none;">Solo se permite un punto decimal.</span>
+            </div>
+                
+                
+
+
+        </div>
+
+        <div class="row g-3 pb-2">
+
+            <label for="txtIndiImpuest" class="col-sm-1 col-form-label">Indicador Impuestos</label>
+            <div class="col-sm-2">
+                <select class="form-select" id="cboIndiImpuest" name="cboIndiImpuest" disabled>
+
+                </select>
+            </div>
+
+            <div class="col-sm-1">
+            </div>
+
+            <label for="txtCentCosto" class="col-sm-1 col-form-label">Centro de Coste</label>
+            <div class="col-sm-2">
+                <input type="text" id="txtCentCosto" name="txtCentCosto" class="form-control" disabled />
+            </div>
+
+        </div>
+
+
+        @*<div class="row g-3 pb-2">
+            <div style="text-align:left;">
+                <button class="btn btn-info" id="btn-DocCont-Agregar" type="button"><i class="ri-file-add-line me-2 align-bottom"></i>Agregar</button>
+            </div>
+
+
+        </div>*@
+
+
+
+</form>
+
+
+
+</div>
+
+<div style="text-align:center;">
+    <button class="btn btn-info" id="btn-Grabar" type="button"><i class="ri-save-3-line me-2 align-bottom"></i>Grabar</button>
+    <button class="btn btn-info" id="btn-Volver" type="button"><i class="ri-arrow-go-back-fill me-2 align-bottom"></i>Volver</button>
+</div>
+
+
+
+@Html.Partial("FrmModalPreviewPDF")

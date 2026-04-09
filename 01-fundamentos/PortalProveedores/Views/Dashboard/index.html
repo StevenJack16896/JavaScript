@@ -1,0 +1,164 @@
+@{ViewBag.Title = "Home";}
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+@section scripts  {
+    <script type="text/javascript" src="~/Scripts/jsDashboard.js?v=1.6"></script> }
+@using AppProveedores.UTI.VarGlobal;
+<style>
+    .iframe-container {
+        width: 90%;
+        max-width: 1400px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        
+    }
+    iframe {
+            width: 100%;
+            height: 785px;
+            border: none;
+            border-radius: 8px;
+            
+    }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .iframe-container {
+                width: 95%;
+            }
+
+            iframe {
+                height: 600px;
+            }
+        }
+
+</style>
+@{
+    if (ViewBag.UserProfileType == UTI_VarGlobal.Constant.ProfileType.Admin || ViewBag.UserProfileType == UTI_VarGlobal.Constant.ProfileType.Logística)
+    {
+    <div class="card">
+        <input type="hidden" id="IdProveedor" value="@ViewBag.Proveedor" />
+        <input type="hidden" id="UserProfileType" value="@ViewBag.UserProfileType" />
+        
+        
+        <div class="card-header border-0">
+            <div class="d-flex align-items-center">
+                <h5 class="card-title mb-0 flex-grow-1">Dashboard Power BI</h5>
+            </div>
+        </div>
+
+        <div class="card-body m-2">
+            <div class="table-responsive table-card">
+                <div class="iframe-container">
+            
+                <iframe title="Dashboard_Facturas"
+                        src="https://app.powerbi.com/view?r=eyJrIjoiYTYzNThmNjktOThmZS00ZTQ2LTg5YWItMzZhNmE2YzBmMjc0IiwidCI6ImQ1YTUwOTNjLTI0YmUtNDUyNi04ZDM1LWZiZmVjYzA5ZGFiNiIsImMiOjR9"
+                        allowFullScreen="true">
+                </iframe>
+                </div>
+            </div>
+        </div>
+        
+
+    </div>
+    }
+    else
+    {
+
+
+        <div class="card">
+            <input type="hidden" id="IdProveedor" value="@ViewBag.Proveedor" />
+            <input type="hidden" id="UserProfileType" value="@ViewBag.UserProfileType" />
+            <div class="card-header border-0">
+                <div class="d-flex align-items-center">
+                    <h5 class="card-title mb-0 flex-grow-1">Listado de Guías Pendientes por Registrar</h5>
+
+
+                    <a class="input-group-text">
+                        <i class="ri-search-2-line"></i>
+                    </a>
+
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" id="txtNroOCBuscarGuia" name="txtNroOCBuscarGuia" placeholder="Nro. de OC. - Guía" />
+                    </div>
+
+                    <div class="flex-shrink-0">
+                        <button type="button" class="btn btn-info w-100" id="btn-atender"><i class="ri-navigation-fill search-icon me-2 align-bottom"></i> Registrar Guía </button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body m-2">
+                <div class="table-responsive table-card">
+                    <table class="table align-middle">
+                        <thead class="table-light text-muted">
+                            <tr>
+                                <th class="text-center">
+                                    <div class="form-check form-switch-success">
+                                        <input class="form-check-input" type="checkbox" id="chkAtenderAllGUIAS" name="chkAtenderAllGUIAS" style="height:25px;width:25px"><label class="form-check-label" for="chkAtenderAllGUIAS" style="padding-left: 3px "> Atender todos </label>
+                                    </div>
+                                </th>
+                                <th class="text-center">Empresa</th> @*BUKRS*@
+                                <th class="text-center">Nro. Orden Compra</th> @*EBELN*@
+                                <th class="text-center">Nro. Entrega</th> @*BELNR*@
+                                <th class="text-center">Nro Guía</th> @*XBLNR*@
+                                <th class="text-center">Fecha de Contabilización Guía</th> @*BUDAT*@
+                                <th class="text-center">Fecha de Documento Guía</th> @*BLDAT*@
+                            </tr>
+                        </thead>
+                        <tbody id="tarea-list-1">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        @*2do Cuadro*@
+        <div class="card">
+            <div class="card-header border-0">
+                <div class="d-flex align-items-center">
+                    <h5 class="card-title mb-0 flex-grow-1">Listado de HES Pendientes por Registrar </h5>
+
+
+
+                    <a class="input-group-text">
+                        <i class="ri-search-2-line"></i>
+                    </a>
+
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" id="txtNroOCBuscarHES" name="txtNroOCBuscarHES" placeholder="Nro. de OC. - HES" />
+                    </div>
+
+                    <div class="flex-shrink-0">
+                        <button type="button" class="btn btn-info w-100" id="btn-atender-hes"><i class="ri-navigation-fill search-icon me-2 align-bottom"></i> Registrar HES</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body m-2">
+                <div class="table-responsive table-card">
+                    <table class="table align-middle">
+                        <thead class="table-light text-muted">
+                            <tr>
+                                <th class="text-center">
+                                    <div class="form-check form-switch-success">
+                                        <input class="form-check-input" type="checkbox" id="chkAtenderAllHES" name="chkAtenderAllHES" style="height:25px;width:25px"><label class="form-check-label" for="chkAtenderAllHES" style="padding-left: 3px "> Atender todos </label>
+                                    </div>
+                                </th>
+                                <th class="text-center">Empresa</th>
+                                <th class="text-center">Nro. Orden Compra</th>
+                                <th class="text-center">Nro. Entrega</th>
+                                <th class="text-center">Nro HES</th> @*LFBNR*@
+                                <th class="text-center">Fecha de Contabilización HES</th>
+                                <th class="text-center">Fecha de Documento HES</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tarea-list-HES">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    }
+
+}

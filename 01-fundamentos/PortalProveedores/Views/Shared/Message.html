@@ -1,0 +1,40 @@
+
+<div class="modal fade" id="modal-message" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title title">Asistente de operaciones de registro</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="hd-modal-id" /><input type="hidden" id="hd-modal-action" />
+                <div class="mensaje"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btn-modal-close" class="btn btn-danger btn-sm" data-bs-dismiss="modal"><i class="ri-close-fill align-bottom"></i>&nbsp;<span class="font-weight-bold">Cerrar</span></button>
+                <button type="button" id="btn-modal-accept" class="btn btn-primary btn-sm" style="display:none"><i class="ri-check-fill align-bottom"></i>&nbsp;<span class="font-weight-bold">Aceptar</span></button>
+            </div>
+        </div>
+    </div>
+</div>
+@using AppProveedores.UTI.Mensajes;
+<span class="msghide" id="span_mensajes" style="display:none">
+    <span id="@UTI_MsgOperation.TituloMensaje.AssistantSearch">@UTI_MsgOperation.GetEnumDescription(UTI_MsgOperation.TituloMensaje.AssistantSearch)</span>
+    <span id="@UTI_MsgOperation.TituloMensaje.AssistantOperation">@UTI_MsgOperation.GetEnumDescription(UTI_MsgOperation.TituloMensaje.AssistantOperation)</span>
+    <span id="@UTI_MsgOperation.TituloMensaje.AssistantSession">@UTI_MsgOperation.GetEnumDescription(UTI_MsgOperation.TituloMensaje.AssistantSession)</span>
+    <span id="@UTI_MsgOperation.DescripcionMensaje.VerifyExpiredSession">@UTI_MsgOperation.GetEnumDescription(UTI_MsgOperation.DescripcionMensaje.VerifyExpiredSession)</span>
+    <span id="@UTI_MsgOperation.DescripcionMensaje.ErrorAjax">@UTI_MsgOperation.GetEnumDescription(UTI_MsgOperation.DescripcionMensaje.ErrorAjax)</span>
+    <span id="@UTI_MsgOperation.DescripcionMensaje.ProcessInformation">@UTI_MsgOperation.GetEnumDescription(UTI_MsgOperation.DescripcionMensaje.ProcessInformation)</span>
+    <span id="@UTI_MsgOperation.DescripcionMensaje.LoadingInformation">@UTI_MsgOperation.GetEnumDescription(UTI_MsgOperation.DescripcionMensaje.LoadingInformation)</span>
+    <span id="@UTI_MsgOperation.DescripcionMensaje.NotFoundInformation">@UTI_MsgOperation.GetEnumDescription(UTI_MsgOperation.DescripcionMensaje.NotFoundInformation)</span>
+    <span id="@UTI_MsgOperation.DescripcionMensaje.QuestionDelete">@UTI_MsgOperation.GetEnumDescription(UTI_MsgOperation.DescripcionMensaje.QuestionDelete)</span>
+    <span id="@UTI_MsgOperation.DescripcionMensaje.QuestionCopyKPI">@UTI_MsgOperation.GetEnumDescription(UTI_MsgOperation.DescripcionMensaje.QuestionCopyKPI)</span>
+    <span id="@UTI_MsgOperation.TituloMensaje.AssistantDetalleLinea">@UTI_MsgOperation.GetEnumDescription(UTI_MsgOperation.TituloMensaje.AssistantDetalleLinea)</span>
+    <span id="@UTI_MsgOperation.DescripcionMensaje.RequiredDetalleLinea">@UTI_MsgOperation.GetEnumDescription(UTI_MsgOperation.DescripcionMensaje.RequiredDetalleLinea)</span>
+    <span id="@UTI_MsgOperation.DescripcionMensaje.RequiredSeleccionarDetalleLinea">@UTI_MsgOperation.GetEnumDescription(UTI_MsgOperation.DescripcionMensaje.RequiredSeleccionarDetalleLinea)</span>
+    <span id="@UTI_MsgOperation.DescripcionMensaje.ExistUsuariosKPI">@UTI_MsgOperation.GetEnumDescription(UTI_MsgOperation.DescripcionMensaje.ExistUsuariosKPI)</span>
+    <span id="@UTI_MsgOperation.DescripcionMensaje.QuestionUpdate">@UTI_MsgOperation.GetEnumDescription(UTI_MsgOperation.DescripcionMensaje.QuestionUpdate)</span>
+    <span id="@UTI_MsgOperation.DescripcionMensaje.RequiredMaxUnMes">@UTI_MsgOperation.GetEnumDescription(UTI_MsgOperation.DescripcionMensaje.RequiredMaxUnMes)</span>
+    <span id="@UTI_MsgOperation.DescripcionMensaje.RequiredMoreTimeout">@UTI_MsgOperation.GetEnumDescription(UTI_MsgOperation.DescripcionMensaje.RequiredMoreTimeout)</span>
+</span>

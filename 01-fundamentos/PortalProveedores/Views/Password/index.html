@@ -1,0 +1,62 @@
+@{ViewBag.Title = "Password";}
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+@section scripts  {
+    <script type="text/javascript" src="~/Scripts/jsPassword.js?v=1.0"></script> }
+
+
+<div class="card">
+    <input type="hidden" id="IdProveedor" value="@ViewBag.Proveedor" />
+    <input type="hidden" id="UserProfileType" value="@ViewBag.UserProfileType" />
+
+
+    <div class="card-header border-0">
+
+        <div class=" align-items-center pb-2">
+
+            <label for="txtPassActual" class="col-sm-1 col-form-label">Contraseña Actual</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="txtPassActual" name="txtPassActual" maxlength="20"/>
+            </div>
+
+
+        </div>
+
+        </br>
+        <div class=" align-items-center pb-2">
+
+            <label for="txtPassNew" class="col-sm-1 col-form-label">Contraseña Nueva</label>
+            <div class="col-sm-4">
+                <input type="password" class="form-control" id="txtPassNew" name="txtPassNew" maxlength="20"/>
+            </div>
+
+
+        </div>
+        </br>
+        
+        <div class="align-items-center pb-2">
+
+            <label for="txtPassConfirm" class="col-sm-2 col-form-label">Confirmar Contraseña</label>
+            <div class="col-sm-4">
+                <input type="password" class="form-control" id="txtPassConfirm" name="txtPassConfirm" maxlength="20" />
+            </div>
+
+
+        </div>
+
+
+        </br>
+        <div class="row pb-2" >
+
+
+            <div class="col-sm-2">
+                <button type="button" class="btn btn-info w-100" id="sbtnSavePass"><i class="ri-pencil-line search-icon me-2 align-bottom"></i>Cambiar</button>
+            </div>
+
+            
+
+        </div>
+
+
+    </div>
+    
+</div>

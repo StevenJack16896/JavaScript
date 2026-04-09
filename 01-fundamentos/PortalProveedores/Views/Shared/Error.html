@@ -1,0 +1,33 @@
+@{Layout = null;}
+@model string
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olvidó su contraseña</title>
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/assets/css/app.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-body text-center">
+                        <h2 class="card-title text-danger">Ocurrió un problema</h2>
+                        <p class="card-text mt-3">
+                            @Model
+                        </p>
+                        <div class="mt-4">
+                            <a href="@Url.Action("Index", "Login")" class="btn btn-primary">Volver al Inicio</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

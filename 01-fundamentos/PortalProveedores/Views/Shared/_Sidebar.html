@@ -1,0 +1,147 @@
+@{Layout = null;}
+@using AppProveedores.UTI.VarGlobal;
+<script src="~/Content/assets/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<div class="app-menu navbar-menu">
+    <!-- LOGO -->
+    <div class="navbar-brand-box">
+        <!-- Dark Logo-->
+        <a href="javascript:void(0)" class="logo logo-dark">
+            <span class="logo-sm">
+                <img src="@Url.Content("/Content/assets/images/logo-sm.png")" alt="" height="22">
+            </span>
+            <span class="logo-lg">
+                <img src="@Url.Content("/Content/assets/images/SPM-PROVEE.png")" alt="" height="17" style="height: 65px;">
+            </span>
+        </a>
+        <!-- Light Logo-->
+        <a href="javascript:void(0)" class="logo logo-light">
+            <span class="logo-sm">
+                <img src="@Url.Content("/Content/assets/images/logo-sm.png")" alt="" height="22">
+            </span>
+            <span class="logo-lg">
+                <img src="@Url.Content("/Content/assets/images/SPM-PROVEE.png")" alt="" height="17" style="height: 65px;">
+            </span>
+        </a>
+        <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">
+            <i class="ri-record-circle-line"></i>
+        </button>
+    </div>
+
+    <div id="scrollbar">
+        <div class="container-fluid">
+
+            <div id="two-column-menu">
+            </div>
+            <ul class="navbar-nav" id="navbar-nav">
+                <li class="menu-title"><span data-key="t-menu">Menu</span></li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="@Url.Content("~/Dashboard")">
+                        <i class="ri-honour-line"></i> <span data-key="Pendientes">Pendientes</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#Consultas" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="Consultas">
+                        <i class="ri-file-search-fill"></i> <span data-key="t-Consultas">Consultas</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="Consultas">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="@Url.Content("~/RRHH/Documento")" class="nav-link" data-key="t-registro-inspecciones">Documentos</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#Proveedor" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="Proveedor">
+                        <i class="ri-truck-fill"></i> <span data-key="t-Proveedor">Proveedor</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="Proveedor">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="@Url.Content("~/RRHH/Proveedor")" class="nav-link" data-key="t-registro-proveedor">Mantenedor</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </li>
+
+                @{
+
+                    if (ViewBag.UserProfileType == UTI_VarGlobal.Constant.ProfileType.Admin)
+                    {
+
+
+
+                        <li class="nav-item">
+                            <a class="nav-link menu-link" href="#Graphics" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="Dashboard">
+                                <i class="ri-dashboard-3-line"></i> <span data-key="t-Dashboard">Dashboard</span>
+                            </a>
+                            <div class="collapse menu-dropdown" id="Graphics">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a href="@Url.Content("~/Graphics/Conciliation")" class="nav-link" data-key="t-mtto-control">Conciliaciones</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a class="nav-link menu-link" href="#Setting" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="Configuración">
+                                <i class="ri-settings-3-line"></i> <span data-key="t-Configuracion">Configuración</span>
+                            </a>
+                            <div class="collapse menu-dropdown" id="Setting">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a href="@Url.Content("~/Setting/Comunicado")" class="nav-link" data-key="t-mtto-comunicado">Comunicados</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Content("~/Setting/Horario")" class="nav-link" data-key="t-mtto-horario">Horarios</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
+
+
+
+                    }
+
+                }
+
+
+
+            </ul>
+        </div>
+    </div>
+    <div class="sidebar-background"></div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        const currentUrl = window.location.pathname.toLowerCase();
+
+        $(".nav-link").each(function () {
+            const linkHref = $(this).attr("href")?.toLowerCase();
+
+            if (currentUrl === linkHref) {
+                $(this).addClass("active");
+
+                // Si está dentro de un menú desplegable
+                const parentCollapse = $(this).closest(".menu-dropdown");
+                if (parentCollapse.length) {
+                    parentCollapse.addClass("show");
+
+                    const parentToggle = parentCollapse.prev(".menu-link");
+                    parentToggle.addClass("active");
+                    parentToggle.attr("aria-expanded", "true");
+                }
+            }
+        });
+    });
+</script>
